@@ -4,6 +4,8 @@
 import { useEffect, useState, useCallback } from 'react'
 import { supabase, type Diagnosis, type PipelineFailure, type FixFeedback, type TeamDiagnosisStats } from '../lib/supabase'
 
+
+
 // ── useDiagnoses ──────────────────────────────────────────────
 // Fetches recent diagnoses and subscribes to live INSERT events.
 // Dashboard updates instantly when FastAPI writes a new diagnosis.
@@ -100,7 +102,7 @@ export function useTeamStats(teamId: string | null) {
       .single()
       .then(({ data, error }) => {
         if (error && error.code !== 'PGRST116') setError(error.message)
-        else setStats(data as TeamDiagnosisStats)
+        else setStats((data ?? null) as unknown as TeamDiagnosisStats)
         setLoading(false)
       })
   }, [teamId])
@@ -124,7 +126,8 @@ export function useSubmitFeedback() {
     setError(null)
     const { data, error } = await supabase
       .from('fix_feedback')
-      .insert({ diagnosis_id: diagnosisId, team_id: teamId, worked, notes: notes ?? null })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .insert([{ diagnosis_id: diagnosisId, team_id: teamId, worked, notes: notes ?? null }] as any)
       .select()
       .single()
 
@@ -155,8 +158,9 @@ export function useCurrentUser() {
           .eq('id', uid)
           .single()
           .then(({ data }) => {
-            setTeamId(data?.team_id ?? null)
-            setRole((data?.role as 'admin' | 'member') ?? null)
+            const user = data as { team_id: string | null; role: 'admin' | 'member' } | null
+            setTeamId(user?.team_id ?? null)
+            setRole(user?.role ?? null)
             setLoading(false)
           })
       } else {
