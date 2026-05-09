@@ -6,8 +6,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import os
+import logging
+
+from dotenv import load_dotenv
+load_dotenv()  # Load .env before env vars are read
 
 from backend.routes import pipeline, auth, teams
+
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
@@ -16,9 +22,12 @@ async def lifespan(app: FastAPI):
     required = ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY", "SUPABASE_ANON_KEY"]
     missing = [k for k in required if not os.environ.get(k)]
     if missing:
-        raise RuntimeError(f"Missing required env vars: {', '.join(missing)}")
-    yield
-    # Shutdown — nothing to clean up
+        logger.warning(f"Missing required env vars: {', '.join(missing)} — some features may not work")
+    try:
+        yield
+    finally:
+        # Shutdown — nothing to clean up yet, but finally ensures it always runs
+        logger.info("DeployIQ API shutting down")
 
 
 app = FastAPI(
@@ -29,10 +38,14 @@ app = FastAPI(
 )
 
 # ── CORS ──────────────────────────────────────────────────────
-ALLOWED_ORIGINS = os.environ.get(
-    "ALLOWED_ORIGINS",
-    "http://localhost:5500,http://localhost:3000"
-).split(",")
+ALLOWED_ORIGINS = [
+    o.strip()
+    for o in os.environ.get(
+        "ALLOWED_ORIGINS",
+        "http://localhost:5500,http://localhost:3000"
+    ).split(",")
+    if o.strip()
+]
 
 app.add_middleware(
     CORSMiddleware,
