@@ -1,11 +1,13 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/config.js",       "dest": "/config.js" },
-    { "src": "/app.js",          "dest": "/app.js" },
-    { "src": "/styles.css",      "dest": "/styles.css" },
-    { "src": "/styles-extra.css","dest": "/styles-extra.css" },
-    { "src": "/(.*)",            "dest": "/index.html" }
+    { "src": "/config.js",          "dest": "/config.js" },
+    { "src": "/app.js",             "dest": "/app.js" },
+    { "src": "/features.js",        "dest": "/features.js" },
+    { "src": "/styles.css",         "dest": "/styles.css" },
+    { "src": "/styles-extra.css",   "dest": "/styles-extra.css" },
+    { "src": "/styles-chat.css",    "dest": "/styles-chat.css" },
+    { "src": "/styles-lang.css",    "dest": "/styles-lang.css" },
+    { "src": "/(.*)",               "dest": "/index.html" }
   ]
 }
-
