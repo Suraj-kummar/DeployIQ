@@ -377,40 +377,6 @@ document.querySelectorAll('.theme-chip').forEach(chip => {
 });
 
 
-function applyTheme(name) {
-  const t = THEMES[name] || THEMES.default;
-  const r = document.documentElement.style;
-  r.setProperty('--primary',       t.primary);
-  r.setProperty('--accent',        t.accent);
-  r.setProperty('--karke-mid',     t.karke);
-  r.setProperty('--karke',         t.karke);
-  r.setProperty('--bg',            t.bg);
-  r.setProperty('--primary-glow',  t.primary + '55');
-  r.setProperty('--accent-glow',   t.accent  + '44');
-  r.setProperty('--karke-glow',    t.karke   + '44');
-
-  // Recolor the animated orbs for full immersion
-  const orb1 = document.querySelector('.orb-1');
-  const orb2 = document.querySelector('.orb-2');
-  const orb3 = document.querySelector('.orb-3');
-  if (orb1) orb1.style.background = `radial-gradient(circle, ${t.orb1}, ${t.karke})`;
-  if (orb2) orb2.style.background = `radial-gradient(circle, ${t.orb2}, ${t.primary})`;
-  if (orb3) orb3.style.background = `radial-gradient(circle, ${t.orb3}, ${t.karke})`;
-
-  localStorage.setItem('deployiq_theme_name', name);
-  document.querySelectorAll('.theme-chip').forEach(c =>
-    c.classList.toggle('active', c.dataset.theme === name)
-  );
-  toast(`Theme: ${t.label} applied ✓`, 'success');
-}
-
-const savedTheme = localStorage.getItem('deployiq_theme_name');
-if (savedTheme) applyTheme(savedTheme);
-
-document.querySelectorAll('.theme-chip').forEach(chip => {
-  chip.addEventListener('click', () => applyTheme(chip.dataset.theme));
-});
-
 
 document.getElementById('theme-modal-btn').addEventListener('click', () => {
   document.getElementById('theme-modal').classList.add('open');
