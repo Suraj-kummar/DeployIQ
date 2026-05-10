@@ -1,29 +1,11 @@
 {
   "version": 2,
-  "installCommand": "echo 'No install needed - generate_config.py uses stdlib only'",
-  "buildCommand": "python generate_config.py",
-  "outputDirectory": ".",
   "routes": [
-    {
-      "src": "/config.js",
-      "dest": "/config.js",
-      "headers": { "Cache-Control": "no-cache" }
-    },
-    {
-      "src": "/app.js",
-      "dest": "/app.js"
-    },
-    {
-      "src": "/styles.css",
-      "dest": "/styles.css"
-    },
-    {
-      "src": "/styles-extra.css",
-      "dest": "/styles-extra.css"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+    { "src": "/config.js",       "dest": "/config.js" },
+    { "src": "/app.js",          "dest": "/app.js" },
+    { "src": "/styles.css",      "dest": "/styles.css" },
+    { "src": "/styles-extra.css","dest": "/styles-extra.css" },
+    { "src": "/(.*)",            "dest": "/index.html" }
   ]
 }
+
