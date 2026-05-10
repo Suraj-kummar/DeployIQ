@@ -163,9 +163,83 @@ body {
 .nav-link:hover, .nav-link.active { color: var(--text); background: var(--glass); border-color: var(--glass-border); }
 .nav-link.active { color: var(--primary); }
 .header-actions { display: flex; align-items: center; gap: 12px; }
-.status-badge { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; font-weight: 500; color: var(--green); background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); padding: 5px 12px; border-radius: 20px; }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse-dot 2s infinite; }
-@keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+/* ── Agent Online Badge — Premium ─────────────────────── */
+.status-badge {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(52,211,153,0.06));
+  border: 1px solid rgba(52,211,153,0.3);
+  padding: 5px 12px 5px 8px; border-radius: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 16px rgba(52,211,153,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+  cursor: default;
+  transition: box-shadow 0.3s, border-color 0.3s;
+  position: relative; overflow: hidden;
+}
+.status-badge::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(52,211,153,0.06), transparent);
+  animation: badge-shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes badge-shimmer {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(200%); }
+}
+.status-badge:hover {
+  box-shadow: 0 0 28px rgba(52,211,153,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+  border-color: rgba(52,211,153,0.5);
+}
+
+/* Sonar rings */
+.agent-online-rings {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; flex-shrink: 0;
+}
+.aor-core {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: radial-gradient(circle, #6ee7b7, #34d399);
+  box-shadow: 0 0 6px rgba(52,211,153,0.8), 0 0 12px rgba(52,211,153,0.4);
+  position: relative; z-index: 2;
+  animation: core-pulse 2s ease-in-out infinite;
+}
+@keyframes core-pulse { 0%,100%{ box-shadow: 0 0 6px rgba(52,211,153,0.8), 0 0 12px rgba(52,211,153,0.4); } 50%{ box-shadow: 0 0 10px rgba(52,211,153,1), 0 0 20px rgba(52,211,153,0.6); } }
+
+.aor-ring {
+  position: absolute; border-radius: 50%;
+  border: 1.5px solid rgba(52,211,153,0.5);
+  animation: sonar-ring 2s ease-out infinite;
+}
+.aor-ring-1 { width: 14px; height: 14px; animation-delay: 0s; }
+.aor-ring-2 { width: 18px; height: 18px; animation-delay: 0.7s; }
+@keyframes sonar-ring {
+  0%   { transform: scale(0.4); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* Text */
+.agent-online-text {
+  display: flex; flex-direction: column; line-height: 1.1; gap: 1px;
+}
+.agent-label {
+  font-size: 0.58rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px;
+  color: rgba(110,231,183,0.65);
+}
+.agent-status-word {
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3px;
+  background: linear-gradient(90deg, #34d399, #6ee7b7);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* LIVE pill */
+.agent-live-pill {
+  font-size: 0.5rem; font-weight: 800; letter-spacing: 1.5px;
+  background: linear-gradient(135deg, #34d399, #059669);
+  color: #fff; padding: 2px 6px; border-radius: 20px;
+  animation: live-blink 2.5s ease-in-out infinite;
+  box-shadow: 0 2px 8px rgba(52,211,153,0.4);
+}
+@keyframes live-blink { 0%,100%{ opacity:1; } 50%{ opacity:0.55; } }
 
 /* ── Main ── */
 .main { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
