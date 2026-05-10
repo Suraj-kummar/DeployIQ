@@ -2,20 +2,27 @@
   "version": 2,
   "buildCommand": "python generate_config.py",
   "outputDirectory": ".",
-  "builds": [
-    {
-      "src": "backend/main.py",
-      "use": "@vercel/python"
-    }
-  ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "backend/main.py"
+      "src": "/config.js",
+      "dest": "/config.js",
+      "headers": { "Cache-Control": "no-cache" }
+    },
+    {
+      "src": "/app.js",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/styles.css",
+      "dest": "/styles.css"
+    },
+    {
+      "src": "/styles-extra.css",
+      "dest": "/styles-extra.css"
     },
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/index.html"
     }
   ]
 }
