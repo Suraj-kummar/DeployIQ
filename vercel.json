@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "buildCommand": "python generate_config.py",
+  "outputDirectory": ".",
+  "builds": [
+    {
+      "src": "backend/main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
