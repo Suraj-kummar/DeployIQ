@@ -73,9 +73,17 @@
         </div>
         <button class="theme-toggle" id="theme-modal-btn" title="Custom Themes">🎨</button>
         <button class="theme-toggle" id="shortcuts-btn" title="Keyboard Shortcuts (Ctrl+/)">⌨️</button>
-        <div class="status-badge">
-          <span class="status-dot"></span>
-          Agent Online
+        <div class="status-badge" id="agent-status-badge" title="DeployIQ AI Agent is active">
+          <span class="agent-online-rings">
+            <span class="aor-ring aor-ring-1"></span>
+            <span class="aor-ring aor-ring-2"></span>
+            <span class="aor-core"></span>
+          </span>
+          <span class="agent-online-text">
+            <span class="agent-label">Agent</span>
+            <span class="agent-status-word">Online</span>
+          </span>
+          <span class="agent-live-pill">LIVE</span>
         </div>
         <!-- Theme toggle -->
         <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle theme">
@@ -533,32 +541,59 @@ The more context you provide, the higher confidence the diagnosis."
     </div>
   </div>
 
-  <!-- ── Chat Mode Panel (shown after diagnosis) ────────────── -->
+  <!-- ── AI Agent Chat Panel (Fancy) ─────────────────────── -->
   <div class="chat-panel" id="chat-panel" style="display:none">
+    <!-- Animated header -->
     <div class="chat-panel-header">
-      <div class="chat-panel-title">
-        <span>🤖</span> Ask DeployIQ
-        <span class="chat-badge">AI Chat</span>
+      <div class="chat-agent-identity">
+        <div class="chat-agent-avatar">
+          <div class="agent-ring"></div>
+          <div class="agent-ring ring2"></div>
+          <span class="agent-emoji">🤖</span>
+        </div>
+        <div class="chat-agent-info">
+          <div class="chat-agent-name">DeployIQ <span class="agent-ai-tag">AI</span></div>
+          <div class="chat-agent-status"><span class="agent-pulse"></span>Online · Ready to help</div>
+        </div>
       </div>
-      <button class="chat-close" id="chat-close">✕</button>
+      <button class="chat-close" id="chat-close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
+
+    <!-- Quick action chips -->
+    <div class="chat-quick-chips" id="chat-quick-chips">
+      <button class="chat-chip" data-q="Why did this break?">💥 Why did it break?</button>
+      <button class="chat-chip" data-q="How do I fix this?">🔧 How to fix?</button>
+      <button class="chat-chip" data-q="How can I prevent this in future?">🛡️ Prevent it</button>
+      <button class="chat-chip" data-q="Is there an alternative fix?">🔄 Alternatives</button>
+    </div>
+
+    <!-- Messages -->
     <div class="chat-messages" id="chat-messages">
       <div class="chat-msg assistant">
-        <div class="chat-avatar">🤖</div>
+        <div class="chat-avatar-sm">🤖</div>
         <div class="chat-bubble">I've analyzed your logs. Ask me anything about this failure — what caused it, why this specific line errored, alternative fixes, or how to prevent it.</div>
       </div>
     </div>
+
+    <!-- Input row -->
     <div class="chat-input-row">
-      <input class="chat-input" id="chat-input" placeholder="Ask a follow-up question…" />
+      <div class="chat-input-wrap">
+        <input class="chat-input" id="chat-input" placeholder="Ask anything about this failure…" autocomplete="off"/>
+      </div>
       <button class="chat-send" id="chat-send">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- Chat toggle button (shown after diagnosis) -->
-  <button class="chat-fab" id="chat-fab" style="display:none" title="Ask DeployIQ">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+  <!-- Fancy AI FAB -->
+  <button class="chat-fab" id="chat-fab" style="display:none" title="Ask DeployIQ AI">
+    <div class="fab-glow"></div>
+    <div class="fab-inner">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    </div>
     <span class="chat-fab-badge">AI</span>
   </button>
 
