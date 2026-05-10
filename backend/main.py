@@ -1,7 +1,7 @@
 # backend/main.py
 # FastAPI application entry point — wires all routers together.
 
-from fastapi import FastAPI  # noqa: E402
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import os
@@ -10,7 +10,7 @@ import logging
 from dotenv import load_dotenv
 load_dotenv()  # Load .env before env vars are read
 
-from backend.routes import pipeline, auth, teams
+from backend.routes import pipeline, auth, teams  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
