@@ -304,6 +304,7 @@ const THEMES = {
   folklore:   { primary:'#9ca3af', accent:'#d1d5db', karke:'#6b7280',  bg:'#050505', orb1:'#9ca3af', orb2:'#6b7280', orb3:'#4b5563', label:'🌲 Folklore'         },
   evermore:   { primary:'#d97706', accent:'#fbbf24', karke:'#92400e',  bg:'#080300', orb1:'#b45309', orb2:'#d97706', orb3:'#78350f', label:'🍂 Evermore'         },
   fearless:   { primary:'#f59e0b', accent:'#fde68a', karke:'#b45309',  bg:'#070400', orb1:'#f59e0b', orb2:'#fcd34d', orb3:'#92400e', label:'✨ Fearless'         },
+  ttpd:       { primary:'#d4d4d4', accent:'#fafaf9', karke:'#525252',  bg:'#030303', orb1:'#a3a3a3', orb2:'#e5e5e5', orb3:'#404040', label:'🖊️ TTPD'               },
 
   // ── The Weeknd ────────────────────────────────────────────────
   afterhours: { primary:'#ff2d20', accent:'#ff6b35', karke:'#7f1d1d',  bg:'#0a0000', orb1:'#dc2626', orb2:'#ff6b35', orb3:'#450a0a', label:'🌆 After Hours'     },
@@ -336,6 +337,9 @@ const THEMES = {
 
   // ── Harry Styles ──────────────────────────────────────────────
   fineline:   { primary:'#f43f5e', accent:'#fb7185', karke:'#be123c',  bg:'#0f000a', orb1:'#f43f5e', orb2:'#fb7185', orb3:'#9f1239', label:'🎸 Fine Line'       },
+
+  // ── Tory Lanez ────────────────────────────────────────────────
+  aloneatprom: { primary:'#e879f9', accent:'#f0abfc', karke:'#a21caf', bg:'#0a0014', orb1:'#d946ef', orb2:'#c026d3', orb3:'#7e22ce', label:'🪩 Alone at Prom'    },
 };
 
 function applyTheme(name) {
