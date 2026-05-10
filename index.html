@@ -727,9 +727,10 @@ The more context you provide, the higher confidence the diagnosis."
 
   <!-- ── Theme Modal ─────────────────────────────────────────── -->
   <div class="feature-modal" id="theme-modal">
-    <div class="feature-modal-inner">
+    <div class="feature-modal-inner theme-modal-wide">
       <div class="feature-modal-header"><span>🎨 Custom Themes</span><button id="theme-modal-close" class="modal-close">✕</button></div>
-      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Pick an accent colour theme:</p>
+
+      <div class="theme-section-label">✦ Classic</div>
       <div class="theme-chips">
         <div class="theme-chip active" data-theme="default" style="--tc:#3b82f6">🌌 Default</div>
         <div class="theme-chip" data-theme="ocean"   style="--tc:#06b6d4">🌊 Ocean</div>
@@ -738,8 +739,21 @@ The more context you provide, the higher confidence the diagnosis."
         <div class="theme-chip" data-theme="rose"    style="--tc:#ec4899">🌸 Rose</div>
         <div class="theme-chip" data-theme="mono"    style="--tc:#94a3b8">🖤 Mono</div>
       </div>
+
+      <div class="theme-section-label" style="margin-top:18px">🎵 Album Vibes</div>
+      <div class="theme-chips">
+        <div class="theme-chip" data-theme="lover"      style="--tc:#f9a8d4">💕 Lover</div>
+        <div class="theme-chip" data-theme="red"        style="--tc:#ef4444">🩸 Red</div>
+        <div class="theme-chip" data-theme="midnights"  style="--tc:#818cf8">🌙 Midnights</div>
+        <div class="theme-chip" data-theme="fineline"   style="--tc:#f43f5e">🎸 Fine Line</div>
+        <div class="theme-chip" data-theme="happier"    style="--tc:#84cc16">💚 Happier</div>
+        <div class="theme-chip" data-theme="afterhours" style="--tc:#ff2d20">🌆 After Hours</div>
+        <div class="theme-chip" data-theme="sour"       style="--tc:#a855f7">💜 SOUR</div>
+        <div class="theme-chip" data-theme="unverano"   style="--tc:#facc15">🌴 Un Verano</div>
+      </div>
     </div>
   </div>
+
 
   <!-- ── Shortcuts Modal ─────────────────────────────────────── -->
   <div class="feature-modal" id="shortcuts-modal">

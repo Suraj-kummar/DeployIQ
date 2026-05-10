@@ -288,26 +288,58 @@ document.getElementById('weekly-report-btn').addEventListener('click', () => {
 
 // ── F9: Custom Themes ─────────────────────────────────────────
 const THEMES = {
-  default: { primary:'#3b82f6', accent:'#f472b6', karke:'#7c3aed', bg:'#03020a' },
-  ocean:   { primary:'#06b6d4', accent:'#67e8f9', karke:'#0284c7', bg:'#020c14' },
-  sunset:  { primary:'#f97316', accent:'#fbbf24', karke:'#dc2626', bg:'#0f0500' },
-  forest:  { primary:'#22c55e', accent:'#86efac', karke:'#16a34a', bg:'#010f05' },
-  rose:    { primary:'#ec4899', accent:'#f9a8d4', karke:'#be185d', bg:'#0f0208' },
-  mono:    { primary:'#94a3b8', accent:'#e2e8f0', karke:'#64748b', bg:'#020408' }
+  // ── Classic ───────────────────────────────────────────────────
+  default:    { primary:'#3b82f6', accent:'#f472b6', karke:'#7c3aed',  bg:'#03020a', orb1:'#3b82f6', orb2:'#f472b6', orb3:'#7c3aed', label:'🌌 Default'     },
+  ocean:      { primary:'#06b6d4', accent:'#67e8f9', karke:'#0284c7',  bg:'#020c14', orb1:'#06b6d4', orb2:'#0ea5e9', orb3:'#0284c7', label:'🌊 Ocean'        },
+  sunset:     { primary:'#f97316', accent:'#fbbf24', karke:'#dc2626',  bg:'#0f0500', orb1:'#f97316', orb2:'#fbbf24', orb3:'#dc2626', label:'🌅 Sunset'       },
+  forest:     { primary:'#22c55e', accent:'#86efac', karke:'#16a34a',  bg:'#010f05', orb1:'#22c55e', orb2:'#86efac', orb3:'#15803d', label:'🌿 Forest'        },
+  rose:       { primary:'#ec4899', accent:'#f9a8d4', karke:'#be185d',  bg:'#0f0208', orb1:'#ec4899', orb2:'#f9a8d4', orb3:'#be185d', label:'🌸 Rose'          },
+  mono:       { primary:'#94a3b8', accent:'#e2e8f0', karke:'#64748b',  bg:'#020408', orb1:'#94a3b8', orb2:'#e2e8f0', orb3:'#475569', label:'🖤 Mono'          },
+
+  // ── Album Themes ──────────────────────────────────────────────
+  // Taylor Swift — Lover (soft pink, lilac, baby blue pastel)
+  lover:      { primary:'#f9a8d4', accent:'#c4b5fd', karke:'#e879f9',  bg:'#0d0010', orb1:'#f9a8d4', orb2:'#c4b5fd', orb3:'#e879f9', label:'💕 Lover'        },
+  // Taylor Swift — Red (deep crimson, burgundy, black)
+  red:        { primary:'#ef4444', accent:'#fca5a5', karke:'#991b1b',  bg:'#0f0000', orb1:'#dc2626', orb2:'#991b1b', orb3:'#7f1d1d', label:'🩸 Red'           },
+  // Taylor Swift — Midnights (dark navy, silver, lavender)
+  midnights:  { primary:'#818cf8', accent:'#c7d2fe', karke:'#4338ca',  bg:'#020214', orb1:'#6366f1', orb2:'#818cf8', orb3:'#312e81', label:'🌙 Midnights'    },
+  // Harry Styles — Fine Line (hot pink, red, deep rose)
+  fineline:   { primary:'#f43f5e', accent:'#fb7185', karke:'#be123c',  bg:'#0f000a', orb1:'#f43f5e', orb2:'#fb7185', orb3:'#9f1239', label:'🎸 Fine Line'    },
+  // Billie Eilish — neon lime green, black
+  happier:    { primary:'#84cc16', accent:'#bef264', karke:'#4d7c0f',  bg:'#010802', orb1:'#65a30d', orb2:'#84cc16', orb3:'#3f6212', label:'💚 Happier'       },
+  // The Weeknd — After Hours (neon red, deep noir, orange glow)
+  afterhours: { primary:'#ff2d20', accent:'#ff6b35', karke:'#7f1d1d',  bg:'#0a0000', orb1:'#dc2626', orb2:'#ff6b35', orb3:'#450a0a', label:'🌆 After Hours'  },
+  // Olivia Rodrigo — SOUR (purple-to-blue, moody)
+  sour:       { primary:'#a855f7', accent:'#818cf8', karke:'#6d28d9',  bg:'#06000f', orb1:'#7c3aed', orb2:'#6366f1', orb3:'#4c1d95', label:'💜 SOUR'          },
+  // Bad Bunny — Un Verano Sin Ti (yellow, hot magenta, tropical)
+  unverano:   { primary:'#facc15', accent:'#f0abfc', karke:'#ea580c',  bg:'#080400', orb1:'#eab308', orb2:'#f0abfc', orb3:'#ea580c', label:'🌴 Un Verano'    },
 };
 
 function applyTheme(name) {
   const t = THEMES[name] || THEMES.default;
   const r = document.documentElement.style;
-  r.setProperty('--primary', t.primary);
-  r.setProperty('--accent',  t.accent);
-  r.setProperty('--karke-mid', t.karke);
-  r.setProperty('--bg', t.bg);
-  r.setProperty('--primary-glow', t.primary + '55');
-  r.setProperty('--accent-glow',  t.accent  + '44');
+  r.setProperty('--primary',       t.primary);
+  r.setProperty('--accent',        t.accent);
+  r.setProperty('--karke-mid',     t.karke);
+  r.setProperty('--karke',         t.karke);
+  r.setProperty('--bg',            t.bg);
+  r.setProperty('--primary-glow',  t.primary + '55');
+  r.setProperty('--accent-glow',   t.accent  + '44');
+  r.setProperty('--karke-glow',    t.karke   + '44');
+
+  // Recolor the animated orbs for full immersion
+  const orb1 = document.querySelector('.orb-1');
+  const orb2 = document.querySelector('.orb-2');
+  const orb3 = document.querySelector('.orb-3');
+  if (orb1) orb1.style.background = `radial-gradient(circle, ${t.orb1}, ${t.karke})`;
+  if (orb2) orb2.style.background = `radial-gradient(circle, ${t.orb2}, ${t.primary})`;
+  if (orb3) orb3.style.background = `radial-gradient(circle, ${t.orb3}, ${t.karke})`;
+
   localStorage.setItem('deployiq_theme_name', name);
-  document.querySelectorAll('.theme-chip').forEach(c => c.classList.toggle('active', c.dataset.theme === name));
-  toast(`Theme: ${name} ✓`, 'success');
+  document.querySelectorAll('.theme-chip').forEach(c =>
+    c.classList.toggle('active', c.dataset.theme === name)
+  );
+  toast(`Theme: ${t.label} applied ✓`, 'success');
 }
 
 const savedTheme = localStorage.getItem('deployiq_theme_name');
@@ -316,6 +348,7 @@ if (savedTheme) applyTheme(savedTheme);
 document.querySelectorAll('.theme-chip').forEach(chip => {
   chip.addEventListener('click', () => applyTheme(chip.dataset.theme));
 });
+
 
 document.getElementById('theme-modal-btn').addEventListener('click', () => {
   document.getElementById('theme-modal').classList.add('open');

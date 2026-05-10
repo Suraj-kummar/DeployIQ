@@ -827,3 +827,33 @@ kbd {
   .feature-modal-inner { padding: 24px 18px; }
   .theme-chips { grid-template-columns: 1fr 1fr 1fr; }
 }
+
+/* -- Album Theme Modal Extensions ----------------------------- */
+.theme-modal-wide { max-width: 480px !important; width: 92vw !important; }
+.theme-section-label {
+  font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.8px; color: var(--text-muted);
+  padding-bottom: 8px; margin-bottom: 10px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.theme-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.theme-chip {
+  padding: 11px 10px; border-radius: var(--radius-sm);
+  border: 2px solid rgba(255,255,255,0.08); cursor: pointer;
+  font-size: 0.78rem; font-weight: 600; color: var(--text-dim);
+  transition: all 0.22s; text-align: center;
+  background: rgba(255,255,255,0.03); position: relative; overflow: hidden;
+}
+.theme-chip::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--tc, #3b82f6); opacity: 0.9;
+  border-radius: 2px 2px 0 0;
+}
+.theme-chip::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at top, var(--tc, #3b82f6) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.theme-chip:hover { border-color: var(--tc, rgba(255,255,255,0.2)); color: var(--text); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.theme-chip:hover::after { opacity: 0.08; }
+.theme-chip.active { border-color: var(--tc, var(--primary)); color: var(--text); background: rgba(255,255,255,0.06); box-shadow: 0 0 16px color-mix(in srgb, var(--tc, #3b82f6) 30%, transparent); }
