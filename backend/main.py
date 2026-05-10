@@ -1,8 +1,7 @@
 # backend/main.py
 # FastAPI application entry point — wires all routers together.
 
-# pyrefly: ignore [missing-import]
-from fastapi import FastAPI
+from fastapi import FastAPI  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import os
