@@ -55,6 +55,15 @@
         <a href="#docs" class="nav-link" id="nav-docs">Docs</a>
       </nav>
       <div class="header-actions">
+        <select id="lang-selector" class="meta-select" title="Language" style="font-size:0.75rem;padding:4px 8px">
+          <option value="en">🌐 EN</option>
+          <option value="es">ES</option>
+          <option value="fr">FR</option>
+          <option value="de">DE</option>
+          <option value="hi">HI</option>
+        </select>
+        <button class="theme-toggle" id="theme-modal-btn" title="Custom Themes">🎨</button>
+        <button class="theme-toggle" id="shortcuts-btn" title="Keyboard Shortcuts (Ctrl+/)">⌨️</button>
         <div class="status-badge">
           <span class="status-dot"></span>
           Agent Online
@@ -136,6 +145,11 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
                 Load Example
               </button>
+              <button class="btn-ghost" id="file-upload-btn" title="Upload log file">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Upload File
+              </button>
+              <input type="file" id="file-upload-input" accept=".log,.txt,.yml,.yaml,.json" style="display:none"/>
             </div>
           </div>
         </div>
@@ -200,12 +214,14 @@ The more context you provide, the higher confidence the diagnosis."
             <div class="output-actions">
               <button class="btn-ghost" id="copy-btn" title="Copy full report">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-                Copy Report
+                Copy
               </button>
-              <button class="btn-ghost" id="new-diagnosis-btn" title="New diagnosis">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-                New Diagnosis
-              </button>
+              <button class="btn-ghost" id="export-md-btn" title="Export as Markdown">📄 Export</button>
+              <button class="btn-ghost" id="export-pdf-btn" title="Print / Save as PDF">🖨️ PDF</button>
+              <button class="btn-ghost" id="share-btn" title="Share link">🔗 Share</button>
+              <button class="btn-ghost" id="notify-btn" title="Send to Slack/Discord">🔔 Notify</button>
+              <button class="btn-ghost" id="rerun-btn" title="Re-run and compare">🔁 Re-run</button>
+              <button class="btn-ghost" id="new-diagnosis-btn" title="New diagnosis">+ New</button>
             </div>
           </div>
           <!-- Summary cards -->
@@ -384,6 +400,7 @@ The more context you provide, the higher confidence the diagnosis."
       <div class="analytics-header">
         <h2 class="analytics-title">📊 Pipeline Intelligence</h2>
         <p class="analytics-subtitle">Real-time insights from your diagnosis history</p>
+        <button class="btn-ghost" id="weekly-report-btn" style="margin-top:12px">📧 Download Weekly Report</button>
       </div>
 
       <!-- KPI Cards -->
@@ -632,6 +649,63 @@ The more context you provide, the higher confidence the diagnosis."
   <!-- Toast notifications -->
   <div class="toast-container" id="toast-container"></div>
 
+  <!-- ── Share Modal ─────────────────────────────────────────── -->
+  <div class="feature-modal" id="share-modal">
+    <div class="feature-modal-inner">
+      <div class="feature-modal-header"><span>🔗 Share Diagnosis</span><button id="share-modal-close" class="modal-close">✕</button></div>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:12px">Anyone with this link can view the diagnosis result.</p>
+      <div style="display:flex;gap:8px">
+        <input id="share-link-input" class="otp-email-input" style="flex:1;font-size:.78rem" readonly placeholder="Click 'Share' on a diagnosis first…"/>
+        <button id="share-copy-btn" class="btn-ghost">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Notify Modal ────────────────────────────────────────── -->
+  <div class="feature-modal" id="notify-modal">
+    <div class="feature-modal-inner">
+      <div class="feature-modal-header"><span>🔔 Send Notification</span><button id="notify-modal-close" class="modal-close">✕</button></div>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:12px">Send this diagnosis to a Slack or Discord channel via webhook.</p>
+      <label class="otp-label">Slack / Discord Webhook URL</label>
+      <input id="webhook-url-input" class="otp-email-input" placeholder="https://hooks.slack.com/… or https://discord.com/api/webhooks/…" style="margin-bottom:12px"/>
+      <button id="send-notify-btn" class="btn-send-otp" style="margin-top:4px">Send Notification</button>
+    </div>
+  </div>
+
+  <!-- ── Compare Modal ───────────────────────────────────────── -->
+  <div class="feature-modal" id="compare-modal">
+    <div class="feature-modal-inner">
+      <div class="feature-modal-header"><span>🔁 Re-run Comparison</span><button id="compare-modal-close" class="modal-close">✕</button></div>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Changes between previous and new diagnosis:</p>
+      <div id="compare-body"></div>
+    </div>
+  </div>
+
+  <!-- ── Theme Modal ─────────────────────────────────────────── -->
+  <div class="feature-modal" id="theme-modal">
+    <div class="feature-modal-inner">
+      <div class="feature-modal-header"><span>🎨 Custom Themes</span><button id="theme-modal-close" class="modal-close">✕</button></div>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Pick an accent colour theme:</p>
+      <div class="theme-chips">
+        <div class="theme-chip active" data-theme="default" style="--tc:#3b82f6">🌌 Default</div>
+        <div class="theme-chip" data-theme="ocean"   style="--tc:#06b6d4">🌊 Ocean</div>
+        <div class="theme-chip" data-theme="sunset"  style="--tc:#f97316">🌅 Sunset</div>
+        <div class="theme-chip" data-theme="forest"  style="--tc:#22c55e">🌿 Forest</div>
+        <div class="theme-chip" data-theme="rose"    style="--tc:#ec4899">🌸 Rose</div>
+        <div class="theme-chip" data-theme="mono"    style="--tc:#94a3b8">🖤 Mono</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Shortcuts Modal ─────────────────────────────────────── -->
+  <div class="feature-modal" id="shortcuts-modal">
+    <div class="feature-modal-inner">
+      <div class="feature-modal-header"><span>⌨️ Keyboard Shortcuts</span><button id="shortcuts-modal-close" class="modal-close">✕</button></div>
+      <div id="shortcuts-list"></div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
+  <script src="features.js"></script>
 </body>
 </html>
