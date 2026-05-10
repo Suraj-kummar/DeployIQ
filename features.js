@@ -289,31 +289,89 @@ document.getElementById('weekly-report-btn').addEventListener('click', () => {
 // ── F9: Custom Themes ─────────────────────────────────────────
 const THEMES = {
   // ── Classic ───────────────────────────────────────────────────
-  default:    { primary:'#3b82f6', accent:'#f472b6', karke:'#7c3aed',  bg:'#03020a', orb1:'#3b82f6', orb2:'#f472b6', orb3:'#7c3aed', label:'🌌 Default'     },
-  ocean:      { primary:'#06b6d4', accent:'#67e8f9', karke:'#0284c7',  bg:'#020c14', orb1:'#06b6d4', orb2:'#0ea5e9', orb3:'#0284c7', label:'🌊 Ocean'        },
-  sunset:     { primary:'#f97316', accent:'#fbbf24', karke:'#dc2626',  bg:'#0f0500', orb1:'#f97316', orb2:'#fbbf24', orb3:'#dc2626', label:'🌅 Sunset'       },
-  forest:     { primary:'#22c55e', accent:'#86efac', karke:'#16a34a',  bg:'#010f05', orb1:'#22c55e', orb2:'#86efac', orb3:'#15803d', label:'🌿 Forest'        },
-  rose:       { primary:'#ec4899', accent:'#f9a8d4', karke:'#be185d',  bg:'#0f0208', orb1:'#ec4899', orb2:'#f9a8d4', orb3:'#be185d', label:'🌸 Rose'          },
-  mono:       { primary:'#94a3b8', accent:'#e2e8f0', karke:'#64748b',  bg:'#020408', orb1:'#94a3b8', orb2:'#e2e8f0', orb3:'#475569', label:'🖤 Mono'          },
+  default:    { primary:'#3b82f6', accent:'#f472b6', karke:'#7c3aed',  bg:'#03020a', orb1:'#3b82f6', orb2:'#f472b6', orb3:'#7c3aed', label:'🌌 Default'        },
+  ocean:      { primary:'#06b6d4', accent:'#67e8f9', karke:'#0284c7',  bg:'#020c14', orb1:'#06b6d4', orb2:'#0ea5e9', orb3:'#0284c7', label:'🌊 Ocean'           },
+  sunset:     { primary:'#f97316', accent:'#fbbf24', karke:'#dc2626',  bg:'#0f0500', orb1:'#f97316', orb2:'#fbbf24', orb3:'#dc2626', label:'🌅 Sunset'          },
+  forest:     { primary:'#22c55e', accent:'#86efac', karke:'#16a34a',  bg:'#010f05', orb1:'#22c55e', orb2:'#86efac', orb3:'#15803d', label:'🌿 Forest'           },
+  rose:       { primary:'#ec4899', accent:'#f9a8d4', karke:'#be185d',  bg:'#0f0208', orb1:'#ec4899', orb2:'#f9a8d4', orb3:'#be185d', label:'🌸 Rose'             },
+  mono:       { primary:'#94a3b8', accent:'#e2e8f0', karke:'#64748b',  bg:'#020408', orb1:'#94a3b8', orb2:'#e2e8f0', orb3:'#475569', label:'🖤 Mono'             },
 
-  // ── Album Themes ──────────────────────────────────────────────
-  // Taylor Swift — Lover (soft pink, lilac, baby blue pastel)
-  lover:      { primary:'#f9a8d4', accent:'#c4b5fd', karke:'#e879f9',  bg:'#0d0010', orb1:'#f9a8d4', orb2:'#c4b5fd', orb3:'#e879f9', label:'💕 Lover'        },
-  // Taylor Swift — Red (deep crimson, burgundy, black)
-  red:        { primary:'#ef4444', accent:'#fca5a5', karke:'#991b1b',  bg:'#0f0000', orb1:'#dc2626', orb2:'#991b1b', orb3:'#7f1d1d', label:'🩸 Red'           },
-  // Taylor Swift — Midnights (dark navy, silver, lavender)
-  midnights:  { primary:'#818cf8', accent:'#c7d2fe', karke:'#4338ca',  bg:'#020214', orb1:'#6366f1', orb2:'#818cf8', orb3:'#312e81', label:'🌙 Midnights'    },
-  // Harry Styles — Fine Line (hot pink, red, deep rose)
-  fineline:   { primary:'#f43f5e', accent:'#fb7185', karke:'#be123c',  bg:'#0f000a', orb1:'#f43f5e', orb2:'#fb7185', orb3:'#9f1239', label:'🎸 Fine Line'    },
-  // Billie Eilish — neon lime green, black
-  happier:    { primary:'#84cc16', accent:'#bef264', karke:'#4d7c0f',  bg:'#010802', orb1:'#65a30d', orb2:'#84cc16', orb3:'#3f6212', label:'💚 Happier'       },
-  // The Weeknd — After Hours (neon red, deep noir, orange glow)
-  afterhours: { primary:'#ff2d20', accent:'#ff6b35', karke:'#7f1d1d',  bg:'#0a0000', orb1:'#dc2626', orb2:'#ff6b35', orb3:'#450a0a', label:'🌆 After Hours'  },
-  // Olivia Rodrigo — SOUR (purple-to-blue, moody)
-  sour:       { primary:'#a855f7', accent:'#818cf8', karke:'#6d28d9',  bg:'#06000f', orb1:'#7c3aed', orb2:'#6366f1', orb3:'#4c1d95', label:'💜 SOUR'          },
-  // Bad Bunny — Un Verano Sin Ti (yellow, hot magenta, tropical)
-  unverano:   { primary:'#facc15', accent:'#f0abfc', karke:'#ea580c',  bg:'#080400', orb1:'#eab308', orb2:'#f0abfc', orb3:'#ea580c', label:'🌴 Un Verano'    },
+  // ── Taylor Swift ─────────────────────────────────────────────
+  lover:      { primary:'#f9a8d4', accent:'#c4b5fd', karke:'#e879f9',  bg:'#0d0010', orb1:'#f9a8d4', orb2:'#c4b5fd', orb3:'#e879f9', label:'💕 Lover'           },
+  red:        { primary:'#ef4444', accent:'#fca5a5', karke:'#991b1b',  bg:'#0f0000', orb1:'#dc2626', orb2:'#991b1b', orb3:'#7f1d1d', label:'🩸 Red'              },
+  midnights:  { primary:'#818cf8', accent:'#c7d2fe', karke:'#4338ca',  bg:'#020214', orb1:'#6366f1', orb2:'#818cf8', orb3:'#312e81', label:'🌙 Midnights'       },
+  swift1989:  { primary:'#7dd3fc', accent:'#bae6fd', karke:'#0ea5e9',  bg:'#00060f', orb1:'#7dd3fc', orb2:'#38bdf8', orb3:'#0284c7', label:'📷 1989'             },
+  folklore:   { primary:'#9ca3af', accent:'#d1d5db', karke:'#6b7280',  bg:'#050505', orb1:'#9ca3af', orb2:'#6b7280', orb3:'#4b5563', label:'🌲 Folklore'         },
+  evermore:   { primary:'#d97706', accent:'#fbbf24', karke:'#92400e',  bg:'#080300', orb1:'#b45309', orb2:'#d97706', orb3:'#78350f', label:'🍂 Evermore'         },
+  fearless:   { primary:'#f59e0b', accent:'#fde68a', karke:'#b45309',  bg:'#070400', orb1:'#f59e0b', orb2:'#fcd34d', orb3:'#92400e', label:'✨ Fearless'         },
+
+  // ── The Weeknd ────────────────────────────────────────────────
+  afterhours: { primary:'#ff2d20', accent:'#ff6b35', karke:'#7f1d1d',  bg:'#0a0000', orb1:'#dc2626', orb2:'#ff6b35', orb3:'#450a0a', label:'🌆 After Hours'     },
+  starboy:    { primary:'#8b5cf6', accent:'#06b6d4', karke:'#4c1d95',  bg:'#02000d', orb1:'#7c3aed', orb2:'#0891b2', orb3:'#4c1d95', label:'⭐ Starboy'          },
+  dawnfm:     { primary:'#f472b6', accent:'#818cf8', karke:'#6d28d9',  bg:'#0d0014', orb1:'#ec4899', orb2:'#818cf8', orb3:'#5b21b6', label:'📻 Dawn FM'          },
+
+  // ── Ed Sheeran ────────────────────────────────────────────────
+  edplus:     { primary:'#f97316', accent:'#fbbf24', karke:'#c2410c',  bg:'#0a0200', orb1:'#ea580c', orb2:'#f59e0b', orb3:'#9a3412', label:'➕ Plus'             },
+  eddivide:   { primary:'#06b6d4', accent:'#67e8f9', karke:'#0891b2',  bg:'#00080f', orb1:'#0ea5e9', orb2:'#38bdf8', orb3:'#075985', label:'➗ Divide'           },
+  edequals:   { primary:'#eab308', accent:'#fde047', karke:'#ca8a04',  bg:'#080600', orb1:'#d97706', orb2:'#facc15', orb3:'#a16207', label:'🟰 Equals'           },
+  edsubtract: { primary:'#60a5fa', accent:'#93c5fd', karke:'#1d4ed8',  bg:'#00030f', orb1:'#3b82f6', orb2:'#60a5fa', orb3:'#1e40af', label:'➖ Subtract'         },
+
+  // ── Lady Gaga ─────────────────────────────────────────────────
+  chromatica: { primary:'#f472b6', accent:'#22d3ee', karke:'#db2777',  bg:'#0f0014', orb1:'#ec4899', orb2:'#06b6d4', orb3:'#be185d', label:'💊 Chromatica'      },
+  bornthisway:{ primary:'#a855f7', accent:'#f43f5e', karke:'#7c3aed',  bg:'#06000f', orb1:'#9333ea', orb2:'#e11d48', orb3:'#6d28d9', label:'🏳️ Born This Way'  },
+  mayhem:     { primary:'#c084fc', accent:'#38bdf8', karke:'#7e22ce',  bg:'#04000f', orb1:'#a855f7', orb2:'#0ea5e9', orb3:'#581c87', label:'⚡ Mayhem'           },
+
+  // ── Arijit Singh ─────────────────────────────────────────────
+  soulful:    { primary:'#e11d48', accent:'#fbbf24', karke:'#9f1239',  bg:'#0a0002', orb1:'#be123c', orb2:'#d97706', orb3:'#881337', label:'🎤 Soulful'          },
+  tumhiho:    { primary:'#f43f5e', accent:'#fda4af', karke:'#be123c',  bg:'#0f0003', orb1:'#e11d48', orb2:'#fb7185', orb3:'#9f1239', label:'❤️ Tum Hi Ho'       },
+
+  // ── Billie Eilish ─────────────────────────────────────────────
+  happier:    { primary:'#84cc16', accent:'#bef264', karke:'#4d7c0f',  bg:'#010802', orb1:'#65a30d', orb2:'#84cc16', orb3:'#3f6212', label:'💚 Happier'          },
+
+  // ── Olivia Rodrigo ────────────────────────────────────────────
+  sour:       { primary:'#a855f7', accent:'#818cf8', karke:'#6d28d9',  bg:'#06000f', orb1:'#7c3aed', orb2:'#6366f1', orb3:'#4c1d95', label:'💜 SOUR'             },
+
+  // ── Bad Bunny ─────────────────────────────────────────────────
+  unverano:   { primary:'#facc15', accent:'#f0abfc', karke:'#ea580c',  bg:'#080400', orb1:'#eab308', orb2:'#f0abfc', orb3:'#ea580c', label:'🌴 Un Verano'       },
+
+  // ── Harry Styles ──────────────────────────────────────────────
+  fineline:   { primary:'#f43f5e', accent:'#fb7185', karke:'#be123c',  bg:'#0f000a', orb1:'#f43f5e', orb2:'#fb7185', orb3:'#9f1239', label:'🎸 Fine Line'       },
 };
+
+function applyTheme(name) {
+  const t = THEMES[name] || THEMES.default;
+  const r = document.documentElement.style;
+  r.setProperty('--primary',       t.primary);
+  r.setProperty('--accent',        t.accent);
+  r.setProperty('--karke-mid',     t.karke);
+  r.setProperty('--karke',         t.karke);
+  r.setProperty('--bg',            t.bg);
+  r.setProperty('--primary-glow',  t.primary + '55');
+  r.setProperty('--accent-glow',   t.accent  + '44');
+  r.setProperty('--karke-glow',    t.karke   + '44');
+
+  // Recolor the animated orbs for full immersion
+  const orb1 = document.querySelector('.orb-1');
+  const orb2 = document.querySelector('.orb-2');
+  const orb3 = document.querySelector('.orb-3');
+  if (orb1) orb1.style.background = `radial-gradient(circle, ${t.orb1}, ${t.karke})`;
+  if (orb2) orb2.style.background = `radial-gradient(circle, ${t.orb2}, ${t.primary})`;
+  if (orb3) orb3.style.background = `radial-gradient(circle, ${t.orb3}, ${t.karke})`;
+
+  localStorage.setItem('deployiq_theme_name', name);
+  document.querySelectorAll('.theme-chip').forEach(c =>
+    c.classList.toggle('active', c.dataset.theme === name)
+  );
+  toast(`Theme: ${t.label} applied ✓`, 'success');
+}
+
+const savedTheme = localStorage.getItem('deployiq_theme_name');
+if (savedTheme) applyTheme(savedTheme);
+
+document.querySelectorAll('.theme-chip').forEach(chip => {
+  chip.addEventListener('click', () => applyTheme(chip.dataset.theme));
+});
+
 
 function applyTheme(name) {
   const t = THEMES[name] || THEMES.default;
