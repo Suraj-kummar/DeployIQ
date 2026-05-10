@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="styles-extra.css" />
+  <link rel="stylesheet" href="styles-lang.css" />
   <!-- Frontend config (generated from .env by generate_config.py) -->
   <script src="config.js" onerror="console.warn('config.js not found — running in demo mode.')"></script>
   <!-- Supabase JS (CDN) -->
@@ -55,13 +56,21 @@
         <a href="#docs" class="nav-link" id="nav-docs">Docs</a>
       </nav>
       <div class="header-actions">
-        <select id="lang-selector" class="meta-select" title="Language" style="font-size:0.75rem;padding:4px 8px">
-          <option value="en">🌐 EN</option>
-          <option value="es">ES</option>
-          <option value="fr">FR</option>
-          <option value="de">DE</option>
-          <option value="hi">HI</option>
-        </select>
+        <!-- Custom Language Dropdown -->
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button class="lang-trigger" id="lang-trigger">
+            <span class="lang-flag" id="lang-flag">🌐</span>
+            <span class="lang-code" id="lang-code">EN</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="lang-menu" id="lang-menu">
+            <div class="lang-option active" data-lang="en"><span>🌐</span><span class="lo-code">EN</span><span class="lo-name">English</span></div>
+            <div class="lang-option" data-lang="es"><span>🇪🇸</span><span class="lo-code">ES</span><span class="lo-name">Español</span></div>
+            <div class="lang-option" data-lang="fr"><span>🇫🇷</span><span class="lo-code">FR</span><span class="lo-name">Français</span></div>
+            <div class="lang-option" data-lang="de"><span>🇩🇪</span><span class="lo-code">DE</span><span class="lo-name">Deutsch</span></div>
+            <div class="lang-option" data-lang="hi"><span>🇮🇳</span><span class="lo-code">HI</span><span class="lo-name">हिन्दी</span></div>
+          </div>
+        </div>
         <button class="theme-toggle" id="theme-modal-btn" title="Custom Themes">🎨</button>
         <button class="theme-toggle" id="shortcuts-btn" title="Keyboard Shortcuts (Ctrl+/)">⌨️</button>
         <div class="status-badge">

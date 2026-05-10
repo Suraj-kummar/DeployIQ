@@ -218,51 +218,57 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
 
 // ── F7: Multi-language (i18n) ────────────────────────────────
+const LANG_META = {
+  en: { flag:'🌐', name:'English'  },
+  es: { flag:'🇪🇸', name:'Español'  },
+  fr: { flag:'🇫🇷', name:'Français' },
+  de: { flag:'🇩🇪', name:'Deutsch'  },
+  hi: { flag:'🇮🇳', name:'हिन्दी'   }
+};
 const LANGS = {
-  en: {
-    diagnose:'Diagnose', history:'History', analytics:'Analytics', docs:'Docs',
-    runDiag:'Run Diagnosis', analyzing:'Analyzing…', heroTitle:'Your pipeline broke.',
-    heroSub:'We\'ll find out why.', placeholder:'Paste your CI/CD logs here…'
-  },
-  es: {
-    diagnose:'Diagnosticar', history:'Historial', analytics:'Analítica', docs:'Docs',
-    runDiag:'Ejecutar Diagnóstico', analyzing:'Analizando…', heroTitle:'Tu pipeline falló.',
-    heroSub:'Lo averiguaremos.', placeholder:'Pega tus logs de CI/CD aquí…'
-  },
-  fr: {
-    diagnose:'Diagnostiquer', history:'Historique', analytics:'Analytique', docs:'Docs',
-    runDiag:'Lancer Diagnostic', analyzing:'Analyse…', heroTitle:'Votre pipeline a échoué.',
-    heroSub:'On va trouver pourquoi.', placeholder:'Collez vos logs CI/CD ici…'
-  },
-  de: {
-    diagnose:'Diagnostizieren', history:'Verlauf', analytics:'Analytik', docs:'Docs',
-    runDiag:'Diagnose starten', analyzing:'Analysieren…', heroTitle:'Deine Pipeline ist fehlgeschlagen.',
-    heroSub:'Wir finden heraus warum.', placeholder:'CI/CD-Logs hier einfügen…'
-  },
-  hi: {
-    diagnose:'डायगनोज़', history:'इतिहास', analytics:'विश्लेषण', docs:'डॉक्स',
-    runDiag:'डायगनोसिस चलाएं', analyzing:'विश्लेषण हो रहा है…', heroTitle:'आपकी पाइपलाइन टूट गई।',
-    heroSub:'हम पता लगाएंगे क्यों।', placeholder:'अपने CI/CD लॉग यहाँ पेस्ट करें…'
-  }
+  en: { diagnose:'Diagnose', history:'History', analytics:'Analytics', docs:'Docs', runDiag:'Run Diagnosis', placeholder:'Paste your CI/CD logs here…' },
+  es: { diagnose:'Diagnosticar', history:'Historial', analytics:'Analítica', docs:'Docs', runDiag:'Ejecutar Diagnóstico', placeholder:'Pega tus logs de CI/CD aquí…' },
+  fr: { diagnose:'Diagnostiquer', history:'Historique', analytics:'Analytique', docs:'Docs', runDiag:'Lancer Diagnostic', placeholder:'Collez vos logs CI/CD ici…' },
+  de: { diagnose:'Diagnostizieren', history:'Verlauf', analytics:'Analytik', docs:'Docs', runDiag:'Diagnose starten', placeholder:'CI/CD-Logs hier einfügen…' },
+  hi: { diagnose:'डायगनोज़', history:'इतिहास', analytics:'विश्लेषण', docs:'डॉक्स', runDiag:'डायगनोसिस चलाएं', placeholder:'अपने CI/CD लॉग यहाँ पेस्ट करें…' }
 };
 
 let currentLang = localStorage.getItem('deployiq_lang') || 'en';
 
 function applyLang(code) {
-  const t = LANGS[code] || LANGS.en;
+  const t    = LANGS[code] || LANGS.en;
+  const meta = LANG_META[code] || LANG_META.en;
   currentLang = code;
   localStorage.setItem('deployiq_lang', code);
-  document.getElementById('nav-diagnose').textContent = t.diagnose;
-  document.getElementById('nav-history').textContent  = t.history;
-  document.getElementById('nav-analytics').textContent = '📊 ' + t.analytics;
-  document.getElementById('nav-docs').textContent     = t.docs;
+  document.getElementById('nav-diagnose').textContent   = t.diagnose;
+  document.getElementById('nav-history').textContent    = t.history;
+  document.getElementById('nav-analytics').textContent  = '📊 ' + t.analytics;
+  document.getElementById('nav-docs').textContent       = t.docs;
   const btn = document.getElementById('diagnose-btn');
-  btn.querySelector('.btn-content').lastChild.textContent = ' ' + t.runDiag;
+  if (btn) btn.querySelector('.btn-content').lastChild.textContent = ' ' + t.runDiag;
   document.getElementById('log-input').placeholder = t.placeholder;
-  document.getElementById('lang-selector').value = code;
+  // Update trigger
+  const flagEl = document.getElementById('lang-flag');
+  const codeEl = document.getElementById('lang-code');
+  if (flagEl) flagEl.textContent = meta.flag;
+  if (codeEl) codeEl.textContent = code.toUpperCase();
+  // Mark active option
+  document.querySelectorAll('.lang-option').forEach(opt =>
+    opt.classList.toggle('active', opt.dataset.lang === code)
+  );
 }
 
-document.getElementById('lang-selector').addEventListener('change', e => applyLang(e.target.value));
+// Custom dropdown wiring
+const _langDrop    = document.getElementById('lang-dropdown');
+const _langTrigger = document.getElementById('lang-trigger');
+if (_langTrigger) {
+  _langTrigger.addEventListener('click', e => { e.stopPropagation(); _langDrop.classList.toggle('open'); });
+}
+document.addEventListener('click', () => _langDrop && _langDrop.classList.remove('open'));
+document.querySelectorAll('.lang-option').forEach(opt => {
+  opt.addEventListener('click', () => { applyLang(opt.dataset.lang); _langDrop.classList.remove('open'); });
+});
+
 applyLang(currentLang);
 
 // ── F8: Weekly Report (UI + download) ────────────────────────
