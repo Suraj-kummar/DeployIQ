@@ -857,3 +857,57 @@ kbd {
 .theme-chip:hover { border-color: var(--tc, rgba(255,255,255,0.2)); color: var(--text); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
 .theme-chip:hover::after { opacity: 0.08; }
 .theme-chip.active { border-color: var(--tc, var(--primary)); color: var(--text); background: rgba(255,255,255,0.06); box-shadow: 0 0 16px color-mix(in srgb, var(--tc, #3b82f6) 30%, transparent); }
+
+/* -- OAuth Buttons (Google / GitHub) ------------------------ */
+.oauth-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0 4px;
+}
+
+.btn-oauth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 18px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-oauth::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.2s;
+}
+
+.btn-oauth:hover::before { background: rgba(255,255,255,0.05); }
+.btn-oauth:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+.btn-oauth:active { transform: translateY(0); }
+.btn-oauth:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* Google button — subtle colored border on hover */
+.btn-google:hover { border-color: rgba(66,133,244,0.5); box-shadow: 0 6px 24px rgba(66,133,244,0.18); }
+
+/* GitHub button — dark */
+.btn-github { background: rgba(36,41,47,0.45); }
+.btn-github:hover { border-color: rgba(255,255,255,0.35); background: rgba(36,41,47,0.7); }
+
+/* Light mode overrides */
+.light-mode .btn-oauth { background: #fff; border-color: #dce1e7; color: #1a1a2e; }
+.light-mode .btn-oauth:hover { background: #f8f9fc; border-color: #bec6d0; }
+.light-mode .btn-github { background: #24292f; color: #fff; border-color: #24292f; }
+.light-mode .btn-github:hover { background: #1c2128; }

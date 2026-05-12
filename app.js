@@ -327,6 +327,80 @@ function startResendTimer(secs) {
   }, 1000);
 }
 
+// ── OAuth callback: handle redirect back from Google / GitHub ──
+(function handleOAuthCallback() {
+  const hash   = window.location.hash;
+  const params = new URLSearchParams(hash.replace(/^#/, ""));
+  // Supabase puts access_token in the URL fragment after OAuth redirect
+  if (params.get("access_token") || params.get("error")) {
+    // Clear the fragment so it doesn't stay in the URL bar
+    history.replaceState(null, "", window.location.pathname);
+  }
+})();
+
+// ── Google Sign-In button ─────────────────────────────────────
+const googleSigninBtn = document.getElementById("google-signin-btn");
+if (googleSigninBtn) {
+  googleSigninBtn.addEventListener("click", async () => {
+    const supa = getSupa();
+    if (!supa) {
+      toast("Supabase not configured — use Demo Mode or add credentials.", "error");
+      return;
+    }
+    googleSigninBtn.disabled = true;
+    googleSigninBtn.innerHTML = `
+      <span class="spinner" style="width:14px;height:14px;border-width:2px"></span>
+      <span>Redirecting to Google…</span>`;
+    const { error } = await supa.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.origin,
+        scopes: "openid email profile",
+        queryParams: { access_type: "offline", prompt: "select_account" },
+      },
+    });
+    if (error) {
+      googleSigninBtn.disabled = false;
+      googleSigninBtn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 48 48">
+          <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.4 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/>
+          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+          <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.5 26.7 36 24 36c-5.3 0-9.8-3.4-11.3-8H6.2C9.5 35.5 16.3 44 24 44z"/>
+          <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.7 2-2 3.8-3.7 5.1l6.2 5.2C38 37 44 32 44 24c0-1.3-.1-2.6-.4-3.9z"/>
+        </svg>
+        <span>Continue with Google</span>`;
+      toast("Google sign-in error: " + error.message, "error");
+    }
+    // On success the page redirects — no further action needed here
+  });
+}
+
+// ── GitHub Sign-In button ─────────────────────────────────────
+const githubSigninBtnEl = document.getElementById("github-signin-btn");
+if (githubSigninBtnEl) {
+  githubSigninBtnEl.addEventListener("click", async () => {
+    const supa = getSupa();
+    if (!supa) {
+      toast("Supabase not configured — use Demo Mode or add credentials.", "error");
+      return;
+    }
+    githubSigninBtnEl.disabled = true;
+    githubSigninBtnEl.querySelector("span").textContent = "Redirecting to GitHub…";
+    const { error } = await supa.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: window.location.origin,
+        scopes: "read:user user:email",
+      },
+    });
+    if (error) {
+      githubSigninBtnEl.disabled = false;
+      githubSigninBtnEl.querySelector("span").textContent = "Continue with GitHub";
+      toast("GitHub sign-in error: " + error.message, "error");
+    }
+  });
+}
+
 // Demo mode (bypass Supabase)
 demoModeBtn.addEventListener("click", () => {
   currentUser = { email: "demo@deployiq.ai" };

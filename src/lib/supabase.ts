@@ -150,6 +150,19 @@ export const signInWithGitHub = () =>
     },
   })
 
+export const signInWithGoogle = () =>
+  supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/auth/callback`,
+      scopes: 'openid email profile',
+      queryParams: {
+        access_type: 'offline',
+        prompt: 'select_account',
+      },
+    },
+  })
+
 export const signOut = () => supabase.auth.signOut()
 
 export const getSession = () => supabase.auth.getSession()
