@@ -607,6 +607,16 @@ Built with 💜 by **Surajj & vyoumm**
 
 <br/><br/>
 
+<!-- Visitor counter -->
+<img src="https://komarev.com/ghpvc/?username=Suraj-kummar&repo=DeployIQ&label=README+views&color=A855F7&style=flat-square" alt="Profile views"/>
+
+<br/><br/>
+
+<!-- GitHub activity graph -->
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=Suraj-kummar&theme=tokyo-night&hide_border=true&area=true&color=A855F7&line=8B5CF6&point=FFD700" width="100%" alt="Contribution Graph"/>
+
+<br/>
+
 > *"Stop debugging. Start shipping."* 🚀
 
 <br/>
