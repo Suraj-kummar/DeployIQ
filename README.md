@@ -505,6 +505,31 @@ Add this step to your existing workflow to send failure events to DeployIQ:
 
 ---
 
+## 🗺️ Roadmap
+
+<div align="center">
+
+| Status | Feature |
+|:---:|:---|
+| ✅ | LangGraph 4-node diagnosis pipeline |
+| ✅ | Claude Sonnet 4.5 + Mistral fallback |
+| ✅ | Supabase Auth (Email OTP + Google OAuth) |
+| ✅ | pgvector semantic similarity search |
+| ✅ | Multi-language UI (EN / ES / FR / DE / HI) |
+| ✅ | Artist-inspired UI themes |
+| ✅ | Diagnosis history & team stats dashboard |
+| ✅ | GitHub Actions CI/CD webhook integration |
+| 🔄 | VS Code extension for inline log diagnosis |
+| 🔄 | Slack bot — `/diagnose` slash command |
+| 🔄 | GitLab CI native integration |
+| 🔄 | Jenkins plugin |
+| 🔄 | AI-generated PR diff auto-commit |
+| 🔄 | Org-level analytics dashboard |
+
+</div>
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Here's how to get started:
