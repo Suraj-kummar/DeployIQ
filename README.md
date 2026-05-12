@@ -36,6 +36,17 @@
   <img src="https://img.shields.io/badge/License-MIT-06B6D4?style=flat-square" alt="License"/>
 </p>
 
+<!-- Live GitHub stats -->
+<p align="center">
+  <img src="https://img.shields.io/github/stars/Suraj-kummar/DeployIQ?style=flat-square&color=FFD700&logo=github" alt="Stars"/>
+  &nbsp;
+  <img src="https://img.shields.io/github/forks/Suraj-kummar/DeployIQ?style=flat-square&color=A855F7&logo=github" alt="Forks"/>
+  &nbsp;
+  <img src="https://img.shields.io/github/issues/Suraj-kummar/DeployIQ?style=flat-square&color=FF6B6B&logo=github" alt="Issues"/>
+  &nbsp;
+  <img src="https://img.shields.io/github/last-commit/Suraj-kummar/DeployIQ?style=flat-square&color=3ECF8E&logo=github" alt="Last Commit"/>
+</p>
+
 </div>
 
 ---
