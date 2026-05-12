@@ -63,7 +63,27 @@
 
 ---
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,12,20&height=3&section=header" width="100%"/>
+## 📸 Screenshots
+
+<div align="center">
+
+| 🏠 Diagnose | 📊 History |
+|:---:|:---:|
+| ![Diagnose Page](.github/assets/ss-diagnose.png) | ![History Page](.github/assets/ss-history.png) |
+
+| 📄 Docs | 🌐 Multi-Language |
+|:---:|:---:|
+| ![Docs Page](.github/assets/ss-docs.png) | ![Language Switcher](.github/assets/ss-languages.png) |
+
+<img src=".github/assets/ss-themes.png" width="60%" alt="Artist Themes — Taylor Swift, The Weeknd, Ed Sheeran & more"/>
+
+*🎨 Artist Themes — personalize your DeployIQ experience*
+
+</div>
+
+---
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,12,19,20,24&height=3&section=header" width="100%"/>
 
 ## 🎬 How It Works
 
