@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "buildCommand": "python generate_config.py",
+  "outputDirectory": ".",
   "routes": [
     { "src": "/config.js",          "dest": "/config.js" },
     { "src": "/app.js",             "dest": "/app.js" },
