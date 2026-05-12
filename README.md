@@ -611,6 +611,28 @@ Built with 💜 by **Surajj & vyoumm**
 
 <br/>
 
+---
+
+## ⭐ Support the Project
+
+If DeployIQ saved you hours of debugging, consider giving it a star — it helps more engineers discover it!
+
+<p align="center">
+  <a href="https://github.com/Suraj-kummar/DeployIQ">
+    <img src="https://img.shields.io/badge/⭐%20Star%20on%20GitHub-FFD700?style=for-the-badge&logo=github&logoColor=black" alt="Star on GitHub"/>
+  </a>
+  &nbsp;
+  <a href="https://github.com/Suraj-kummar/DeployIQ/fork">
+    <img src="https://img.shields.io/badge/🍴%20Fork%20It-A855F7?style=for-the-badge&logo=github&logoColor=white" alt="Fork"/>
+  </a>
+  &nbsp;
+  <a href="https://github.com/Suraj-kummar/DeployIQ/issues/new">
+    <img src="https://img.shields.io/badge/🐛%20Report%20a%20Bug-FF6B6B?style=for-the-badge&logo=github&logoColor=white" alt="Report Bug"/>
+  </a>
+</p>
+
+<br/>
+
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,19,20,24&height=120&section=footer&fontSize=20&fontColor=ffffff&animation=twinkling" width="100%"/>
 
 </div>
