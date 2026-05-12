@@ -505,6 +505,45 @@ Add this step to your existing workflow to send failure events to DeployIQ:
 
 ---
 
+## ❓ FAQ
+
+<details>
+<summary><b>💰 Is DeployIQ free to use?</b></summary>
+
+Yes! DeployIQ is open source under the MIT License. You only pay for your own API usage (Anthropic/OpenAI keys) and your hosting (Render free tier works).
+
+</details>
+
+<details>
+<summary><b>🔐 Are my CI/CD logs sent to third parties?</b></summary>
+
+Your logs are sent to the Anthropic API (Claude) for diagnosis. They are not stored by Anthropic. Within your own deployment, logs are stored in your private Supabase database only.
+
+</details>
+
+<details>
+<summary><b>📦 Which CI/CD platforms are supported?</b></summary>
+
+Currently via webhook: **GitHub Actions**, **GitLab CI**, **Jenkins**, **CircleCI**, **Bitbucket Pipelines**, and any platform that can fire an HTTP POST on failure. Native integrations for GitLab CI and Jenkins are on the roadmap.
+
+</details>
+
+<details>
+<summary><b>🤖 What if Claude is rate-limited?</b></summary>
+
+DeployIQ automatically falls back to **Mistral Small** when Claude returns a 429. Set `MISTRAL_API_KEY` in your `.env` to enable it.
+
+</details>
+
+<details>
+<summary><b>🌍 Can I self-host DeployIQ?</b></summary>
+
+Absolutely. Run `docker-compose up --build` and you're done. Everything is containerized and environment-variable-driven.
+
+</details>
+
+---
+
 ## 🗺️ Roadmap
 
 <div align="center">
